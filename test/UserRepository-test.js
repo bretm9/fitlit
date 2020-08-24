@@ -65,6 +65,10 @@ describe('UserRepository', () => {
     expect(userRepository).to.be.an.instanceof(UserRepository);
   });
 
+  it('should have a property "data" that takes in a set of user data', () => { 
+    expect(userRepository.data).to.equal(users);
+  });
+
   it('should be able to return user data', () => { 
     let user2Data = userRepository.getUserData(2);
     expect(user2Data).to.equal(userRepository.data[1]);
