@@ -53,22 +53,23 @@ describe('UserRepository', () => {
       ]
     };
     users = [user1, user2, user3];
-    userRepository = new UserRepository(userRepository);
+    userRepository = new UserRepository(users);
   });
   
   it('should be a function', () => {
     expect(UserRepository).to.be.a('function');
   });
 
-  it('should be an instance of Round', () => {
+  it('should be an instance of UserRepository', () => {
     expect(userRepository).to.be.an.instanceof(UserRepository);
   });
 
   it('should be able to return user data', () => { 
-    
+    let user2Data = userRepository.getUserData(2);
+    expect(user2Data).to.equal(userRepository.users[1]);
   });
 
-  it('should be able to return average steps goal for all users', () => { 
+  it.skip('should be able to return average steps goal for all users', () => { 
 
   });
 });
