@@ -52,6 +52,7 @@ describe('UserRepository', () => {
         33
       ]
     };
+    
     users = [user1, user2, user3];
     userRepository = new UserRepository(users);
   });
@@ -66,10 +67,11 @@ describe('UserRepository', () => {
 
   it('should be able to return user data', () => { 
     let user2Data = userRepository.getUserData(2);
-    expect(user2Data).to.equal(userRepository.users[1]);
+    expect(user2Data).to.equal(userRepository.data[1]);
   });
 
-  it.skip('should be able to return average steps goal for all users', () => { 
-
+  it('should be able to return average steps goal for all users', () => { 
+    let averageSteps = userRepository.getAverageStepGoals();
+    expect(averageSteps).to.equal(6666);
   });
 });
