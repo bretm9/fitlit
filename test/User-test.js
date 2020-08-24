@@ -27,36 +27,41 @@ describe('User', () => {
   
     user = new User(userData);
 
-    it('Should have an id', () => {
+    it('should have an id', () => {
       expect(user.id).to.equal(userData.id);
     });
   });
 
-  it('Should have an id', () => {
+  it('should have an id', () => {
     expect(user.id).to.equal(userData.id);
   });
 
-  it('Should have a name', () => {
+  it('should have a name', () => {
     expect(user.name).to.equal(userData.name);
   });
 
-  it('Should have an address', () => {
+  it('should have an address', () => {
     expect(user.address).to.equal(userData.address);
   });
 
-  it('Should have an email', () => {
+  it('should have an email', () => {
     expect(user.email).to.equal(userData.email);
   });
 
-  it('Should have a strideLength', () => {
+  it('should have a strideLength', () => {
     expect(user.strideLength).to.equal(userData.strideLength);
   });
 
-  it('Should have a dailyStepGoal', () => {
+  it('should have a dailyStepGoal', () => {
     expect(user.dailyStepGoal).to.equal(userData.dailyStepGoal);
   });
 
-  it('Should have friends', () => {
+  it('should have friends', () => {
     expect(user.friends).to.equal(userData.friends);
+  });
+
+  it('should be able to get first name', () => {
+    firstName = user.getFirstName();
+    expect(firstName).to.equal('Luisa');
   });
 });
