@@ -1,48 +1,83 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Activity Tracker</title>
-  </head>
-  <body>
-    <header>
-      <p>stuff in header</p>
-    </header>
-    <h1>Activity Tracker</h1>
-        <section class="card" id="user-info-card">
-          <div class="container">
-            <h4><b>John Doe</b></h4>
-            <p>Address</p>
-            <p>Email</p>
-            <p>stride length</p>
-            <p>daily step goal</p>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Activity Tracker</title>
+</head>
+
+<body>
+  <header>
+    <p>stuff in header</p>
+  </header>
+  <h1>Activity Tracker</h1>
+  <section class="card-container" id="info-section">
+    <section class="card" id="user-info-card">
+      <div class="container">
+        <h4><b>John Doe</b></h4>
+        <p>Address</p>
+        <p>Email</p>
+        <p>stride length</p>
+        <p>daily step goal</p>
+      </div>
+    </section>
+      <section class="card" id="user-friend-info-card">
+        <div class="friends-container">
+          <div class="friend-info-wrapper">
+            <p>Friend01 name</p>
+            <p>Friend01 info</p>
           </div>
-        </section>
-        <section class="card" id="user-friend-info-card">
-          <div class="friends-container">
-            <div class="friend-info-wrapper">
-              <p>Friend01 name</p>
-              <p>Friend01 info</p>
-            </div>
-            <div class="friend-info-wrapper">
-              <p>Friend02 name</p>
-              <p>Friend02 info</p>
-            </div>
-            <div class="friend-info-wrapper">
-              <p>Friend03 name</p>
-              <p>Friend03 info</p>
-            </div>
+          <div class="friend-info-wrapper">
+            <p>Friend02 name</p>
+            <p>Friend02 info</p>
           </div>
-        </section>
+          <div class="friend-info-wrapper">
+            <p>Friend03 name</p>
+            <p>Friend03 info</p>
+          </div>
+        </div>
+      </section>
+  </section>
+
+  <section class="card-container" id="hydration-section">
+    <section class="card" id="hydration-daily">
+      <div class="hydration-daily-top">
+        <p>Today - 12 oz</p>
+      </div>
+    </section>
+    <section class="card" id="hydration-weekly">
+      <div class="weekly-graph">
+      </div>
+    </section>
+  </section>
+
+  <section class="card-container" id="sleep-section">
+    <section class="card" id="sleep-daily">
+      <div class="sleep-daily-top">
+        <p>Today - 12 oz</p>
+      </div>
+    </section>
+    <section class="card" id="sleep-weekly">
+      <div class="weekly-graph">
+      </div>
+    </section>
+    <section class="card" id="sleep-average">
+      <p>sleep quality: 10%</p>
+      <p>average hours: 3hr</p>
+    </section>
+  </section>
+
+  
 
 
 
 
 
-    <script type="text/javascript" src="../data/users.js"></script>
-    <script type="text/javascript" src="../data/hydration.js"></script>
-    <script type="text/javascript" src="../data/sleep.js"></script>
-    <script type="text/javascript" src="../data/activity.js"></script>
-    <script type="text/javascript" src="./scripts.js"></script>
-  </body>
+  <script type="text/javascript" src="../data/users.js"></script>
+  <script type="text/javascript" src="../data/hydration.js"></script>
+  <script type="text/javascript" src="../data/sleep.js"></script>
+  <script type="text/javascript" src="../data/activity.js"></script>
+  <script type="text/javascript" src="./scripts.js"></script>
+</body>
+
 </html>
