@@ -1,0 +1,3 @@
+class HydrationRepository() {
+  constructor
+}
