@@ -4,7 +4,14 @@ class Hydration {
   }
 
   getDataFromId(data) {
-      return data.filter(instance => instance.userID === this.id);
+      this.data = data.filter(instance => instance.userID === this.id);
+  }
+
+  getAverageFlOzPerDay() {
+    let totalOz = this.data.reduce((currentTotalOz, currentDay) => {
+      return currentTotalOz + currentDay.numOunces;
+    }, 0);
+    return totalOz / this.data.length;
   }
 }
 

@@ -42,7 +42,14 @@ describe('Hydration', () => {
   });
   
   it('should be able to get data from an id', () => {
-    let result = hydration.getDataFromId(hydrationData)
-    expect(result).to.deep.equal([hydrationData[1],hydrationData[3]]);
+    hydration.getDataFromId(hydrationData)
+    expect(hydration.data).to.deep.equal([hydrationData[1],hydrationData[3]]);
   });
+
+  it('should be able to get data from an id', () => {
+    hydration.getDataFromId(hydrationData)
+    let result = hydration.getAverageFlOzPerDay()
+    expect(result).to.deep.equal(78.5);
+  });
+
 });
