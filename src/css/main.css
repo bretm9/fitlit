@@ -1,0 +1,17 @@
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #294D6C;
+  color: #f1f7ff;
+  align-items: center;
+}
+.card {
+  border: 1px solid #d3d3d3;
+  border-radius: .25rem;
+  background-color: #05426c
+}
+.card-container {
+  display: grid;
+  grid-template-columns: 20rem 20rem;
+  grid-column-gap: 2rem;
+}
