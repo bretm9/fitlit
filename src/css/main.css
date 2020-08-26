@@ -1,0 +1,8 @@
+body {
+  background-color: #294D6C;
+  color: #f1f7ff;
+}
+.card {
+  border: 1px solid #d3d3d3;
+  border-radius: .25rem;
+}
