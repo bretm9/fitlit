@@ -31,6 +31,7 @@ describe('Hydration', () => {
       }
     ]
     hydration = new Hydration(2)
+    hydration.getDataFromId(hydrationData)
   });
 
   it('should be a function', () => {
@@ -42,14 +43,16 @@ describe('Hydration', () => {
   });
   
   it('should be able to get data from an id', () => {
-    hydration.getDataFromId(hydrationData)
     expect(hydration.data).to.deep.equal([hydrationData[1],hydrationData[3]]);
   });
 
   it('should be able to get data from an id', () => {
-    hydration.getDataFromId(hydrationData)
     let result = hydration.getAverageFlOzPerDay()
     expect(result).to.deep.equal(78.5);
   });
 
+  it('should be able to get fl oz drank on a specific day', () => {
+    let result = hydration.getFlOzOnDate("2019/06/15");
+    expect(result).to.deep.equal(75);
+  });
 });

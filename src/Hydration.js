@@ -13,6 +13,13 @@ class Hydration {
     }, 0);
     return totalOz / this.data.length;
   }
+  
+  getFlOzOnDate(date) {
+    let hydrationOnDate = this.data.find((_day, index) => {
+      return date === this.data[index].date;
+    });
+    return hydrationOnDate.numOunces;
+  }
 }
 
 
