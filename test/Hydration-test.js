@@ -1,3 +1,5 @@
+const moment = require('moment');
+moment().format(); 
 const chai = require('chai');
 const expect = chai.expect;
 
@@ -10,6 +12,35 @@ describe('Hydration', () => {
   beforeEach(() => {
     hydrationData = [
       {
+        "userID": 2,
+        "date": "2019/06/09",
+        "numOunces": 50
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/10",
+        "numOunces": 70
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/11",
+        "numOunces": 65
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/12",
+        "numOunces": 60
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/13",
+        "numOunces": 75
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/14",
+        "numOunces": 79
+      },{
         "userID": 1,
         "date": "2019/06/15",
         "numOunces": 37
@@ -43,16 +74,31 @@ describe('Hydration', () => {
   });
   
   it('should be able to get data from an id', () => {
-    expect(hydration.data).to.deep.equal([hydrationData[1],hydrationData[3]]);
+    let user2Data = [
+      hydrationData[0],
+      hydrationData[1],
+      hydrationData[2],
+      hydrationData[3],
+      hydrationData[4],
+      hydrationData[5],
+      hydrationData[7],
+      hydrationData[9]
+    ]
+    expect(hydration.data).to.deep.equal(user2Data);
   });
 
-  it('should be able to get data from an id', () => {
+  it('should be able to get average Fl Oz per day for all-time', () => {
     let result = hydration.getAverageFlOzPerDay()
-    expect(result).to.deep.equal(78.5);
+    expect(result).to.deep.equal(69.5);
   });
 
   it('should be able to get fl oz drank on a specific day', () => {
     let result = hydration.getFlOzOnDate("2019/06/15");
     expect(result).to.deep.equal(75);
+  });
+
+  it('should be able to find one week of numOunces', () => {
+    let result = hydration.getOzForPreviousSevenDays("2019/06/15");
+    expect(result).to.deep.equal([50, 70, 65, 60, 75, 79, 75]);
   });
 });

@@ -1,3 +1,6 @@
+const moment = require('moment');
+moment().format(); 
+
 class Hydration {
   constructor(id) {
     this.id = id;
@@ -20,8 +23,19 @@ class Hydration {
     });
     return hydrationOnDate.numOunces;
   }
-}
 
+  getOzForPreviousSevenDays(day) {
+    let currentDay = moment(day, 'YYYY/MM/DD').add(1, 'day');
+    let weekAgo = currentDay.clone().subtract(8,'d');
+    let daysInWeek = this.data.filter(instance => {
+      let dayInLoop = moment(instance.date, 'YYYY/MM/DD').isBetween(weekAgo, currentDay);
+      return dayInLoop
+    });
+    return daysInWeek.map(instance => {
+      return instance.numOunces;
+    });
+  }
+}
 
 if (typeof module !== 'undefined') {
   module.exports = Hydration;
