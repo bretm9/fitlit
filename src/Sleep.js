@@ -22,6 +22,13 @@ class Sleep {
     }, 0);
     return +(totalSleepQuality / this.data.length).toFixed(1);
   }
+
+  getCurrentDaySleepInfo(day, property) {
+    let currentDaySleep = this.data.find(instance => {
+      return instance.date === day;
+    });
+    return currentDaySleep[property];
+  }
 }
 
 if (typeof module !== 'undefined') {

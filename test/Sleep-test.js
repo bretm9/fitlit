@@ -95,4 +95,9 @@ describe('Sleep', () => {
     let result = sleep.getAverageSleepQualityPerDay()
     expect(result).to.deep.equal(2.7);
   });
+
+  it('should be able to get hours slept for a given day', () => {
+    let result = sleep.getCurrentDaySleepInfo("2019/06/19", "hoursSlept")
+    expect(result).to.deep.equal(10.7);
+  });
 });
