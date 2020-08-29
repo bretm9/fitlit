@@ -5,11 +5,12 @@ let hydration = new Hydration(1, hydrationData)
 let userNameNav = document.querySelector('.user-name-nav')
 let userInfoCard = document.querySelector('#user-info-card');
 let HydrationWeeklyGraph = document.querySelector('#hydration-weekly-graph')
+let hydrationDaily = document.querySelector('.hydration-daily-top')
 
 window.addEventListener('load', function() {
   userInfoUpdateHTML();
   updateHydrationWeekHTML("2019/06/22");
-  updateHydrationDayHTML();
+  updateHydrationDayHTML("2019/06/22");
 });
 
 function userInfoUpdateHTML() {
@@ -30,3 +31,9 @@ function updateHydrationWeekHTML(day) {
     HydrationWeeklyGraph.insertAdjacentHTML('beforeend', `<p>Date: ${day.date}, Oz Drank: ${hydrationWeek[i].numOunces} oz</p>`)
   });
 }
+
+function updateHydrationDayHTML(day) {
+  hydrationDaily.innerHTML = `<p>Today - ${hydration.getCurrentDayHydration(day).numOunces} oz</p>`
+  
+}
+
