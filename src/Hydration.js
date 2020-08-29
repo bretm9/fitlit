@@ -1,13 +1,12 @@
-const moment = require('moment');
-moment().format(); 
+
+if (typeof require !== 'undefined') {
+  var moment = require('./moment');
+ }
 
 class Hydration {
-  constructor(id) {
+  constructor(id, data) {
     this.id = id;
-  }
-
-  getDataFromId(data) {
-      this.data = data.filter(instance => instance.userID === this.id);
+    this.data = data.filter(instance => instance.userID === this.id)
   }
 
   getAverageFlOzPerDay() {
