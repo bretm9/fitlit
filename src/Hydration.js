@@ -32,6 +32,11 @@ class Hydration {
       return dayInLoop
     });
   }
+  getCurrentDayHydration(day) {
+    return this.data.find(instance => {
+      return instance.date === day
+    });
+  }
 }
 
 if (typeof module !== 'undefined') {
