@@ -15,6 +15,13 @@ class Sleep {
     }, 0);
     return +(totalHr / this.data.length).toFixed(1);
   }
+
+  getAverageSleepQualityPerDay() {
+    let totalSleepQuality = this.data.reduce((currentTotalSleepQuality, currentDay) => {
+      return currentTotalSleepQuality + currentDay.sleepQuality;
+    }, 0);
+    return +(totalSleepQuality / this.data.length).toFixed(1);
+  }
 }
 
 if (typeof module !== 'undefined') {
