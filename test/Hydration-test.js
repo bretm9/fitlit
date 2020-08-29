@@ -1,5 +1,5 @@
 const moment = require('moment');
-moment().format(); 
+// moment().format(); 
 const chai = require('chai');
 const expect = chai.expect;
 
@@ -61,15 +61,14 @@ describe('Hydration', () => {
         "numOunces": 82
       }
     ]
-    hydration = new Hydration(2)
-    hydration.getDataFromId(hydrationData)
+    hydration = new Hydration(2, hydrationData)
   });
 
   it('should be a function', () => {
     expect(Hydration).to.be.a('function');
   });
 
-  it('should be an instance of UserRepository', () => {
+  it('should be an instance of Hydration', () => {
     expect(hydration).to.be.an.instanceof(Hydration);
   });
   
