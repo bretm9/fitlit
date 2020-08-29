@@ -100,4 +100,19 @@ describe('Sleep', () => {
     let result = sleep.getCurrentDaySleepInfo("2019/06/19", "hoursSlept")
     expect(result).to.deep.equal(10.7);
   });
+
+  it('should be able to get sleep quality for a given day', () => {
+    let result = sleep.getCurrentDaySleepInfo("2019/06/19", "sleepQuality")
+    expect(result).to.deep.equal(1.2);
+  });
+
+  it('should be able to find one week of hours slept', () => {
+    let result = sleep.getSleepInfoForPreviousSevenDays("2019/06/22", "hoursSlept");
+    expect(result).to.deep.equal([4.1, 8, 10.4, 10.7, 9.3, 7.8, 7]);
+  });
+
+  it('should be able to find one week of sleep quality', () => {
+    let result = sleep.getSleepInfoForPreviousSevenDays("2019/06/22", "sleepQuality");
+    expect(result).to.deep.equal([3.8, 2.6, 3.1, 1.2, 1.2, 4.2, 3]);
+  });
 });

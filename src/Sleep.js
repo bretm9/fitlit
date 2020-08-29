@@ -29,6 +29,16 @@ class Sleep {
     });
     return currentDaySleep[property];
   }
+
+  getSleepInfoForPreviousSevenDays(day, property) {
+    let currentDay = moment(day, 'YYYY/MM/DD').add(1, 'day');
+    let weekAgo = currentDay.clone().subtract(8,'d');
+    let daysInWeek = this.data.filter(instance => {
+      let dayInLoop = moment(instance.date, 'YYYY/MM/DD').isBetween(weekAgo, currentDay);
+      return dayInLoop
+    });
+    return daysInWeek.map(instance => instance[property]);
+  }
 }
 
 if (typeof module !== 'undefined') {
