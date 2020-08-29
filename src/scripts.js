@@ -8,7 +8,8 @@ let HydrationWeeklyGraph = document.querySelector('#hydration-weekly-graph')
 
 window.addEventListener('load', function() {
   userInfoUpdateHTML();
-  updateHydrationHTML();
+  updateHydrationWeekHTML("2019/06/22");
+  updateHydrationDayHTML();
 });
 
 function userInfoUpdateHTML() {
@@ -23,14 +24,9 @@ function userInfoUpdateHTML() {
   </div>`
 }
 
-function updateHydrationHTML() {
-  let hydrationWeek = hydration.getOzForPreviousSevenDays();
-  HydrationWeeklyGraph.innerHTML = `<h3>Yo waddup</h3>
-  <p>Day1: ${hydrationWeek[0]} oz</p>
-  <p>Day2: ${hydrationWeek[1]} oz</p>
-  <p>Day3: ${hydrationWeek[2]} oz</p>
-  <p>Day4: ${hydrationWeek[3]} oz</p>
-  <p>Day5: ${hydrationWeek[4]} oz</p>
-  <p>Day6: ${hydrationWeek[5]} oz</p>
-  <p>Day7: ${hydrationWeek[6]} oz</p>`
+function updateHydrationWeekHTML(day) {
+  let hydrationWeek = hydration.getOzForPreviousSevenDays(day);
+  hydrationWeek.map((day, i) => {
+    HydrationWeeklyGraph.insertAdjacentHTML('beforeend', `<p>Date: ${day.date}, Oz Drank: ${hydrationWeek[i].numOunces} oz</p>`)
+  });
 }
