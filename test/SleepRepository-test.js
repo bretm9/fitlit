@@ -325,4 +325,10 @@ describe('SleepRepository', () => {
     let result = sleepRepository.getDataOrganizedByUser()
     expect(result).to.deep.equal(organizedData);
   });
+
+  it('should be able to generate sleep objects for all users from organized data', () => { 
+    let organizedData = sleepRepository.getDataOrganizedByUser()
+    sleepRepository.generateSleepObjects(organizedData);
+    expect(sleepRepository.users).to.deep.equal([sleepUser1, sleepUser2]);
+  });
 });

@@ -23,6 +23,14 @@ class SleepRepository {
       return allUsers;
     }, {});
   }
+  generateSleepObjects(organizedData) {
+    let arrayOfUsers = Object.values(organizedData)
+
+    this.users = arrayOfUsers.map((user, index) => {
+      let newUser;
+      return newUser = new Sleep((index + 1), user);
+    });
+  }
 }
 
 if (typeof module !== 'undefined') {
