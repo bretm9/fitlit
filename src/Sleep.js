@@ -6,7 +6,7 @@ if (typeof require !== 'undefined') {
 class Sleep {
   constructor(id, data) {
     this.id = id;
-    this.data = data.filter(instance => instance.userID === this.id)
+    this.data = data;
   }
 
   getAverageHrPerDay() {
