@@ -1,3 +1,7 @@
+if (typeof module !== 'undefined') {
+  var Sleep = require('../src/Sleep');
+}
+
 class SleepRepository {
   constructor(data) {
     this.data = data;
@@ -8,6 +12,16 @@ class SleepRepository {
       return sleepQuality + currentUser.sleepQuality;
     }, 0);
     return +(totalSleepQuality / this.data.length).toFixed(1);
+  }
+
+  getDataOrganizedByUser() {
+    return this.data.reduce((allUsers, instance) => {
+      if (!allUsers[`user${instance.userID}`]) {
+        allUsers[`user${instance.userID}`] = [];
+      }
+      allUsers[`user${instance.userID}`].push(instance);
+      return allUsers;
+    }, {});
   }
 }
 
