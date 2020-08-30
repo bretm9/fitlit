@@ -23,6 +23,7 @@ class SleepRepository {
       return allUsers;
     }, {});
   }
+  
   generateSleepObjects(organizedData) {
     let arrayOfUsers = Object.values(organizedData)
 
@@ -30,6 +31,17 @@ class SleepRepository {
       let newUser;
       return newUser = new Sleep((index + 1), user);
     });
+  }
+
+  getTopSleepUsers(date) {
+    let usersWithGoodSleep = this.users.filter(user => {
+      let weekSleepQuality = user.getSleepInfoForPreviousSevenDays(date, "sleepQuality")
+      let totalSleepQuality = weekSleepQuality.reduce((sleepQuality, day) => {
+        return sleepQuality + day;
+      });
+      return +(totalSleepQuality / 7).toFixed(1) > 3;
+    });
+    return usersWithGoodSleep;
   }
 }
 
