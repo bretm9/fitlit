@@ -43,6 +43,18 @@ class SleepRepository {
     });
     return usersWithGoodSleep;
   }
+
+  getMostSleepUsers(date) {
+    let infoByDay = this.users.map(sleepUser => {
+      let filteredByDay = sleepUser.data.filter(instance => instance.date === date)
+      return filteredByDay[0];
+    });
+    let sortedByHoursSlept = infoByDay.sort((instanceA, instanceB) => {
+      return instanceA.hoursSlept - instanceB.hoursSlept;
+    });
+    let userWithMostHoursSlept = sortedByHoursSlept[sortedByHoursSlept.length - 1]
+    return sortedByHoursSlept.filter(instance => instance.hoursSlept === userWithMostHoursSlept.hoursSlept);
+  }
 }
 
 if (typeof module !== 'undefined') {
