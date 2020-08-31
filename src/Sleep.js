@@ -39,6 +39,15 @@ class Sleep {
     });
     return daysInWeek.map(instance => instance[property]);
   }
+
+  compareTodayWithYesterday(date) {
+    let yesterdayMoment = moment(date, 'YYYY/MM/DD').subtract(1,'d');
+    let yesterdayDate = moment(yesterdayMoment).format('YYYY/MM/DD');
+    let yesterdaySleepData = this.data.filter(instance => instance.date === yesterdayDate);
+    let todaySleepData = this.data.filter(instance => instance.date === date);
+    let comparison = Math.floor(((todaySleepData[0].sleepQuality/5) - (yesterdaySleepData[0].sleepQuality/5))*100);
+    return `${comparison}%`
+  }
 }
 
 if (typeof module !== 'undefined') {

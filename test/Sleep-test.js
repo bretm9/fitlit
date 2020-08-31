@@ -115,4 +115,9 @@ describe('Sleep', () => {
     let result = sleep.getSleepInfoForPreviousSevenDays("2019/06/22", "sleepQuality");
     expect(result).to.deep.equal([3.8, 2.6, 3.1, 1.2, 1.2, 4.2, 3]);
   });
+
+  it('should be able to compare today\'s sleep quality to yesterday\'s', () => {
+    let result = sleep.compareTodayWithYesterday("2019/06/22");
+    expect(result).to.deep.equal("-25%");
+  });
 });
