@@ -24,11 +24,12 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .card {
   color: #121118;
   display: grid;
   grid-template-columns: 20rem;
-  grid-template-rows: 13rem 13rem 6rem;
+  grid-template-rows: 13rem 13rem;
   grid-template-areas: "image" "text" "stats";
 
   font-family: inherit;
@@ -40,14 +41,14 @@ body {
 
 .card-image {
   grid-area: image;
+  background-image: linear-gradient(#F2E1CF, white);
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
 
 .card-text{
   grid-area: text;
-}
-
-.card-stats {
- grid-area: stats;
+  overflow: auto;
 }
 
 .card-container {
