@@ -48,4 +48,3 @@ function updateSleepDayHTML(date) {
   let sleepToday = currentSleep.data.find(instance => instance.date === date);
   sleepDaily.innerHTML = `Today - Hours slept: ${sleepToday.hoursSlept}, Sleep Quality: ${sleepToday.sleepQuality}`;
 }
-
