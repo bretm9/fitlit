@@ -112,4 +112,18 @@ describe('Activity', () => {
     let result = activity.getCurrentDayActivityInfo("2019/06/19")
     expect(result).to.deep.equal(activityTestData[4]);
   });
+
+  it('should be able to get a week worth of activity data', () => {
+    let weekOfData = [
+      activityTestData[2],
+      activityTestData[3],
+      activityTestData[4],
+      activityTestData[5],
+      activityTestData[6],
+      activityTestData[7],
+      activityTestData[8]
+    ];
+    let result = activity.getActivityInfoForPreviousSevenDays("2019/06/23")
+    expect(result).to.deep.equal(weekOfData);
+  });
 });
