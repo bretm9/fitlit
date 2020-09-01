@@ -1,5 +1,3 @@
-const moment = require('moment');
-// moment().format(); 
 const chai = require('chai');
 const expect = chai.expect;
 

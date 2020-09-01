@@ -1,4 +1,3 @@
-const moment = require('moment');
 const chai = require('chai');
 const expect = chai.expect;
 
@@ -6,7 +5,6 @@ const Sleep = require('../src/Sleep');
 
 describe('Sleep', () => {
   let sleepTestData;
-  let user2SleepWeekData;
   let sleep;
   
   beforeEach(() => {
