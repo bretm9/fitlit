@@ -1,6 +1,10 @@
-if (typeof module !== 'undefined') {
-  var Sleep = require('../src/Sleep');
-}
+// Commented out if block in order for code to be compatible in browser. 
+// This currently breaks testing. 
+// Will refactor.
+
+// if (typeof module !== 'undefined') {
+//   let Sleep = require('../src/Sleep');
+// }
 
 class SleepRepository {
   constructor(data) {
@@ -15,21 +19,21 @@ class SleepRepository {
   }
 
   getDataOrganizedByUser() {
-    return this.data.reduce((allUsers, instance) => {
+    let organizedData = this.data.reduce((allUsers, instance) => {
       if (!allUsers[`user${instance.userID}`]) {
         allUsers[`user${instance.userID}`] = [];
       }
       allUsers[`user${instance.userID}`].push(instance);
       return allUsers;
     }, {});
+    this.organizedData = organizedData;
   }
   
-  generateSleepObjects(organizedData) {
-    let arrayOfUsers = Object.values(organizedData)
+  generateSleepObjects() {
+    let arrayOfUsers = Object.values(this.organizedData)
 
     this.users = arrayOfUsers.map((user, index) => {
-      let newUser;
-      return newUser = new Sleep((index + 1), user);
+      return new Sleep((index + 1), user);
     });
   }
 
@@ -54,6 +58,11 @@ class SleepRepository {
     });
     let userWithMostHoursSlept = sortedByHoursSlept[sortedByHoursSlept.length - 1]
     return sortedByHoursSlept.filter(instance => instance.hoursSlept === userWithMostHoursSlept.hoursSlept);
+  }
+
+  createCurrentUser(id) {
+    let userData = this.data.filter(instance => instance.userID === id)
+    return new Sleep(id, userData);
   }
 }
 
