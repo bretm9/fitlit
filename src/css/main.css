@@ -1,15 +1,55 @@
+@import url(fontawesome-all.min.css);
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,700,300italic,700italic");
+
+header, body, input, select, textarea {
+  color: #ffffff;
+  font-family: "Roboto", Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 1em;
+  line-height: 2;
+}
+
+header {
+  display: box;
+  background-color: #ffffff;
+  width: 100%;
+  text-align: center;
+}
+
 body {
   display: flex;
   flex-direction: column;
-  background-color: #294D6C;
+  background-color: #272635;
   color: #f1f7ff;
   align-items: center;
+  justify-content: center;
 }
 .card {
-  border: 1px solid #d3d3d3;
-  border-radius: .25rem;
-  background-color: #05426c
+  color: #121118;
+  display: grid;
+  grid-template-columns: 20rem;
+  grid-template-rows: 13rem 13rem 6rem;
+  grid-template-areas: "image" "text" "stats";
+
+  font-family: inherit;
+  border-radius: 1rem;
+  background-color: #F7ECE1;
+  box-shadow: 0.5rem 1rem 1rem #121118;
+  text-align: center;
 }
+
+.card-image {
+  grid-area: image;
+}
+
+.card-text{
+  grid-area: text;
+}
+
+.card-stats {
+ grid-area: stats;
+}
+
 .card-container {
   display: grid;
   grid-template-columns: 20rem 20rem;
