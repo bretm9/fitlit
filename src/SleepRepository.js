@@ -1,7 +1,3 @@
-// Commented out if block in order for code to be compatible in browser. 
-// This currently breaks testing. 
-// Will refactor.
-
 class SleepRepository {
   constructor(data) {
     this.data = data;
