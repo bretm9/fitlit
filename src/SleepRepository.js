@@ -3,7 +3,7 @@
 // Will refactor.
 
 // if (typeof module !== 'undefined') {
-//   let Sleep = require('../src/Sleep');
+//   var Sleep = require('../src/Sleep');
 // }
 
 class SleepRepository {
@@ -37,18 +37,18 @@ class SleepRepository {
     });
   }
 
-  getTopSleepUsers(date) {
+  getTopSleepUsersBySleepQuality(date) {
     let usersWithGoodSleep = this.users.filter(user => {
-      let weekSleepQuality = user.getSleepInfoForPreviousSevenDays(date, "sleepQuality")
-      let totalSleepQuality = weekSleepQuality.reduce((sleepQuality, day) => {
-        return sleepQuality + day;
-      });
+      let weekOfSleep = user.getSleepInfoForPreviousSevenDays(date)
+      let totalSleepQuality = weekOfSleep.reduce((sleepQuality, day) => {
+        return sleepQuality + day.sleepQuality;
+      }, 0);
       return +(totalSleepQuality / 7).toFixed(1) > 3;
     });
     return usersWithGoodSleep;
   }
 
-  getMostSleepUsers(date) {
+  getTopSleepUsersByHoursSlept(date) {
     let infoByDay = this.users.map(sleepUser => {
       let filteredByDay = sleepUser.data.filter(instance => instance.date === date)
       return filteredByDay[0];

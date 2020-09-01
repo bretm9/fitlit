@@ -9,35 +9,28 @@ class Sleep {
     this.data = data;
   }
 
-  getAverageHrPerDay() {
+  getAveragePerDay(property) {
     let totalHr = this.data.reduce((currentTotalHr, currentDay) => {
-      return currentTotalHr + currentDay.hoursSlept;
+      return currentTotalHr + currentDay[property];
     }, 0);
     return +(totalHr / this.data.length).toFixed(1);
   }
 
-  getAverageSleepQualityPerDay() {
-    let totalSleepQuality = this.data.reduce((currentTotalSleepQuality, currentDay) => {
-      return currentTotalSleepQuality + currentDay.sleepQuality;
-    }, 0);
-    return +(totalSleepQuality / this.data.length).toFixed(1);
-  }
-
-  getCurrentDaySleepInfo(day, property) {
+  getCurrentDaySleepInfo(date) {
     let currentDaySleep = this.data.find(instance => {
-      return instance.date === day;
+      return instance.date === date;
     });
-    return currentDaySleep[property];
+    return currentDaySleep;
   }
 
-  getSleepInfoForPreviousSevenDays(day, property) {
-    let currentDay = moment(day, 'YYYY/MM/DD').add(1, 'day');
+  getSleepInfoForPreviousSevenDays(date, property) {
+    let daysInWeek;
+    let currentDay = moment(date, 'YYYY/MM/DD').add(1, 'day');
     let weekAgo = currentDay.clone().subtract(8,'d');
-    let daysInWeek = this.data.filter(instance => {
+    return daysInWeek = this.data.filter(instance => {
       let dayInLoop = moment(instance.date, 'YYYY/MM/DD').isBetween(weekAgo, currentDay);
       return dayInLoop
     });
-    return daysInWeek.map(instance => instance[property]);
   }
 
   compareTodayWithYesterday(date) {

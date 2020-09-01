@@ -1,4 +1,3 @@
-const moment = require('moment');
 const chai = require('chai');
 const expect = chai.expect;
 
@@ -6,7 +5,6 @@ const Sleep = require('../src/Sleep');
 
 describe('Sleep', () => {
   let sleepTestData;
-  let user2SleepWeekData;
   let sleep;
   
   beforeEach(() => {
@@ -87,33 +85,31 @@ describe('Sleep', () => {
   });
 
   it('should be able to get average hours slept per day for all-time', () => {
-    let result = sleep.getAverageHrPerDay()
+    let result = sleep.getAveragePerDay("hoursSlept")
     expect(result).to.deep.equal(7.9);
   });
 
   it('should be able to get average quality of sleep per day for all-time', () => {
-    let result = sleep.getAverageSleepQualityPerDay()
+    let result = sleep.getAveragePerDay("sleepQuality")
     expect(result).to.deep.equal(2.7);
   });
 
-  it('should be able to get hours slept for a given day', () => {
-    let result = sleep.getCurrentDaySleepInfo("2019/06/19", "hoursSlept")
-    expect(result).to.deep.equal(10.7);
+  it('should be able to get sleep for a given day', () => {
+    let result = sleep.getCurrentDaySleepInfo("2019/06/19")
+    expect(result).to.deep.equal(sleepTestData[4]);
   });
 
-  it('should be able to get sleep quality for a given day', () => {
-    let result = sleep.getCurrentDaySleepInfo("2019/06/19", "sleepQuality")
-    expect(result).to.deep.equal(1.2);
-  });
-
-  it('should be able to find one week of hours slept', () => {
-    let result = sleep.getSleepInfoForPreviousSevenDays("2019/06/22", "hoursSlept");
-    expect(result).to.deep.equal([4.1, 8, 10.4, 10.7, 9.3, 7.8, 7]);
-  });
-
-  it('should be able to find one week of sleep quality', () => {
-    let result = sleep.getSleepInfoForPreviousSevenDays("2019/06/22", "sleepQuality");
-    expect(result).to.deep.equal([3.8, 2.6, 3.1, 1.2, 1.2, 4.2, 3]);
+  it('should be able to find one week of sleep', () => {
+    let result = sleep.getSleepInfoForPreviousSevenDays("2019/06/22");
+    expect(result).to.deep.equal([
+      sleepTestData[1],
+      sleepTestData[2],
+      sleepTestData[3],
+      sleepTestData[4],
+      sleepTestData[5],
+      sleepTestData[6],
+      sleepTestData[7]
+    ]);
   });
 
   it('should be able to compare today\'s sleep quality to yesterday\'s', () => {
