@@ -2,9 +2,9 @@
 // This currently breaks testing. 
 // Will refactor.
 
-if (typeof module !== 'undefined') {
-  var Sleep = require('../src/Sleep');
-}
+// if (typeof module !== 'undefined') {
+//   var Sleep = require('../src/Sleep');
+// }
 
 class SleepRepository {
   constructor(data) {
