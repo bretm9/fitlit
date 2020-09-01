@@ -10,10 +10,10 @@ class Sleep {
   }
 
   getAveragePerDay(property) {
-    let totalHr = this.data.reduce((currentTotalHr, currentDay) => {
-      return currentTotalHr + currentDay[property];
+    let total = this.data.reduce((currentTotal, currentDay) => {
+      return currentTotal + currentDay[property];
     }, 0);
-    return +(totalHr / this.data.length).toFixed(1);
+    return +(total / this.data.length).toFixed(1);
   }
 
   getCurrentDaySleepInfo(date) {
@@ -23,7 +23,7 @@ class Sleep {
     return currentDaySleep;
   }
 
-  getSleepInfoForPreviousSevenDays(date, property) {
+  getSleepInfoForPreviousSevenDays(date) {
     let daysInWeek;
     let currentDay = moment(date, 'YYYY/MM/DD').add(1, 'day');
     let weekAgo = currentDay.clone().subtract(8,'d');
