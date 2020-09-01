@@ -1,16 +1,23 @@
 let userRepository = new UserRepository(userData);
 let user = new User(userRepository.getUserData(1));
-let hydration = new Hydration(1, hydrationData)
+let hydration = new Hydration(1, hydrationData);
+let sleepRepository = new SleepRepository(sleepData);
+let currentSleep = sleepRepository.createCurrentUser(1);
+
 
 let userNameNav = document.querySelector('.user-name-nav')
 let userInfoCard = document.querySelector('#user-info-card');
 let HydrationWeeklyGraph = document.querySelector('#hydration-weekly-graph')
 let hydrationDaily = document.querySelector('.hydration-daily-top')
+let sleepDaily = document.querySelector('.sleep-daily-top')
 
 window.addEventListener('load', function() {
+  sleepRepository.getDataOrganizedByUser()
+  sleepRepository.generateSleepObjects()
   userInfoUpdateHTML();
   updateHydrationWeekHTML("2019/06/22");
   updateHydrationDayHTML("2019/06/22");
+  updateSleepDayHTML("2019/06/22");
 });
 
 function userInfoUpdateHTML() {
@@ -35,5 +42,10 @@ function updateHydrationWeekHTML(day) {
 function updateHydrationDayHTML(day) {
   hydrationDaily.innerHTML = `<p>Today - ${hydration.getCurrentDayHydration(day).numOunces} oz</p>`
   
+}
+
+function updateSleepDayHTML(date) {
+  let sleepToday = currentSleep.data.find(instance => instance.date === date);
+  sleepDaily.innerHTML = `Today - Hours slept: ${sleepToday.hoursSlept}, Sleep Quality: ${sleepToday.sleepQuality}`;
 }
 
