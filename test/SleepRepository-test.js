@@ -9,9 +9,10 @@ describe('SleepRepository', () => {
   let sleepUserData1;
   let sleepUserData2;
   let organizedTestData;
-  let sleepRepository;
   let sleepUser1;
   let sleepUser2;
+  let sleepRepository;
+  let arrayOfUsers;
   
   beforeEach(() => {
     sleepData = [
@@ -298,10 +299,17 @@ describe('SleepRepository', () => {
       ]
     }
 
-    sleepRepository = new SleepRepository(sleepData);
-
     sleepUser1 = new Sleep(1, sleepUserData1)
     sleepUser2 = new Sleep(2, sleepUserData2)
+    sleepRepository = new SleepRepository(sleepData);
+
+    sleepRepository.organizedData = organizedTestData;
+
+    arrayOfUsers = Object.values(sleepRepository.organizedData);
+
+    sleepRepository.users = arrayOfUsers.map((user, index) => {
+      return new Sleep((index + 1), user);
+    });
   });
  
   it('should be a function', () => {
@@ -326,29 +334,17 @@ describe('SleepRepository', () => {
     expect(sleepRepository.organizedData).to.deep.equal(organizedTestData);
   });
 
-  it('should be able to generate sleep objects for all users from organized data', () => { 
-    let organizedData = sleepRepository.getDataOrganizedByUser()
-    sleepRepository.generateSleepObjects(organizedData);
-    expect(sleepRepository.users).to.deep.equal([sleepUser1, sleepUser2]);
-  });
-
   it('should be able to return users with sleep quality above 3 based on a week', () => { 
-    let organizedData = sleepRepository.getDataOrganizedByUser()
-    sleepRepository.generateSleepObjects(organizedData);
     let topThreeUsers = sleepRepository.getTopSleepUsersBySleepQuality("2019/06/22");
     expect(topThreeUsers).to.deep.equal([sleepUser1]);
   });
 
   it('should be able to return the user with the most sleep for a given day', () => { 
-    let organizedData = sleepRepository.getDataOrganizedByUser()
-    sleepRepository.generateSleepObjects(organizedData);
     let result = sleepRepository.getTopSleepUsersByHoursSlept("2019/06/22")
     expect(result).to.deep.equal([sleepUser2.data[0]]);
   });
 
   it('should be able to return the user with the most sleep for a given day', () => { 
-    let organizedData = sleepRepository.getDataOrganizedByUser()
-    sleepRepository.generateSleepObjects(organizedData);
     let result = sleepRepository.getTopSleepUsersByHoursSlept("2019/06/18")
     expect(result).to.deep.equal([sleepUser1.data[3], sleepUser2.data[4]]);
   });

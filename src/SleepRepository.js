@@ -2,10 +2,6 @@
 // This currently breaks testing. 
 // Will refactor.
 
-// if (typeof module !== 'undefined') {
-//   var Sleep = require('../src/Sleep');
-// }
-
 class SleepRepository {
   constructor(data) {
     this.data = data;
@@ -27,14 +23,6 @@ class SleepRepository {
       return allUsers;
     }, {});
     this.organizedData = organizedData;
-  }
-  
-  generateSleepObjects() {
-    let arrayOfUsers = Object.values(this.organizedData)
-
-    this.users = arrayOfUsers.map((user, index) => {
-      return new Sleep((index + 1), user);
-    });
   }
 
   getTopSleepUsersBySleepQuality(date) {

@@ -14,7 +14,7 @@ let sleepAverage = document.querySelector('#sleep-average');
 
 window.addEventListener('load', function() {
   sleepRepository.getDataOrganizedByUser()
-  sleepRepository.generateSleepObjects()
+  generateSleepObjects(sleepRepository);
   userInfoUpdateHTML();
   updateHydrationWeekHTML("2019/06/22");
   updateHydrationDayHTML("2019/06/22");
@@ -64,4 +64,12 @@ function updateSleepWeekHTML(date) {
       'beforeend', `<p>sleep quality: ${currentSleepUser.getAveragePerDay("hoursSlept")}</p>
       <p>average hours: ${currentSleepUser.getAveragePerDay("sleepQuality")}</p>`
     );
+  }
+
+  function generateSleepObjects(sleepRepository) {
+    let arrayOfUsers = Object.values(sleepRepository.organizedData)
+
+    sleepRepository.users = arrayOfUsers.map((user, index) => {
+      return new Sleep((index + 1), user);
+    });
   }
