@@ -85,12 +85,12 @@ describe('Sleep', () => {
   });
 
   it('should be able to get average hours slept per day for all-time', () => {
-    let result = sleep.getAverageHrPerDay()
+    let result = sleep.getAveragePerDay("hoursSlept")
     expect(result).to.deep.equal(7.9);
   });
 
   it('should be able to get average quality of sleep per day for all-time', () => {
-    let result = sleep.getAverageSleepQualityPerDay()
+    let result = sleep.getAveragePerDay("sleepQuality")
     expect(result).to.deep.equal(2.7);
   });
 

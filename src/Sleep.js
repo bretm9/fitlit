@@ -9,18 +9,11 @@ class Sleep {
     this.data = data;
   }
 
-  getAverageHrPerDay() {
+  getAveragePerDay(property) {
     let totalHr = this.data.reduce((currentTotalHr, currentDay) => {
-      return currentTotalHr + currentDay.hoursSlept;
+      return currentTotalHr + currentDay[property];
     }, 0);
     return +(totalHr / this.data.length).toFixed(1);
-  }
-
-  getAverageSleepQualityPerDay() {
-    let totalSleepQuality = this.data.reduce((currentTotalSleepQuality, currentDay) => {
-      return currentTotalSleepQuality + currentDay.sleepQuality;
-    }, 0);
-    return +(totalSleepQuality / this.data.length).toFixed(1);
   }
 
   getCurrentDaySleepInfo(date) {
