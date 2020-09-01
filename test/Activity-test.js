@@ -126,4 +126,9 @@ describe('Activity', () => {
     let result = activity.getActivityInfoForPreviousSevenDays("2019/06/23")
     expect(result).to.deep.equal(weekOfData);
   });
+
+  it('should be able to get average minutes active for a given week', () => {
+    let result = activity.getAverageActivityForWeek("2019/06/23")
+    expect(result).to.deep.equal(141);
+  });
 });

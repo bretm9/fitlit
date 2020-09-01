@@ -24,6 +24,14 @@ class Activity {
       return dayInLoop;
     });
   }
+
+  getAverageActivityForWeek(date) {
+    let activityInWeek = this.getActivityInfoForPreviousSevenDays(date)
+    let total = activityInWeek.reduce((currentTotal, currentDay) => {
+      return currentTotal + currentDay.minutesActive;
+    }, 0);
+    return Math.floor(total / 7);
+  }
 }
 
 if (typeof module !== 'undefined') {
