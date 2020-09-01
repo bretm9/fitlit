@@ -131,4 +131,9 @@ describe('Activity', () => {
     let result = activity.getAverageActivityForWeek("2019/06/23")
     expect(result).to.deep.equal(141);
   });
+
+  it('should be able to get the user\'s all-time stair climing record', () => {
+    let result = activity.getActivityRecord("flightsOfStairs")
+    expect(result).to.deep.equal(37);
+  });
 });

@@ -32,6 +32,14 @@ class Activity {
     }, 0);
     return Math.floor(total / 7);
   }
+
+  getActivityRecord(property) {
+    let dataSortedByRecord = this.data.sort((dayA, dayB) => {
+      return dayB[property] - dayA[property];
+    });
+    console.log(dataSortedByRecord);
+    return dataSortedByRecord[0][property];
+  }
 }
 
 if (typeof module !== 'undefined') {
