@@ -11,7 +11,7 @@ header, body, input, select, textarea {
 
 header {
   display: box;
-  background-color: #ffffff;
+  background-color: #121118;
   width: 100%;
   text-align: center;
 }
@@ -41,18 +41,27 @@ body {
 
 .card-image {
   grid-area: image;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-image: linear-gradient(#F2E1CF, white);
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
+  background-size: cover;
+}
+
+.card-image h1 {
+  font-size: 4rem;
 }
 
 .card-text{
   grid-area: text;
   overflow: auto;
+  margin: 1.5rem;
 }
 
 .card-container {
   display: grid;
   grid-template-columns: 20rem 20rem;
-  grid-column-gap: 2rem;
+  grid-gap: 2rem;
 }
