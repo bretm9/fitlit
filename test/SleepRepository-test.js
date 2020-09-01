@@ -335,21 +335,21 @@ describe('SleepRepository', () => {
   it('should be able to return users with sleep quality above 3 based on a week', () => { 
     let organizedData = sleepRepository.getDataOrganizedByUser()
     sleepRepository.generateSleepObjects(organizedData);
-    let topThreeUsers = sleepRepository.getTopSleepUsers("2019/06/22", "sleepQuality");
+    let topThreeUsers = sleepRepository.getTopSleepUsersBySleepQuality("2019/06/22");
     expect(topThreeUsers).to.deep.equal([sleepUser1]);
   });
 
   it('should be able to return the user with the most sleep for a given day', () => { 
     let organizedData = sleepRepository.getDataOrganizedByUser()
     sleepRepository.generateSleepObjects(organizedData);
-    let result = sleepRepository.getMostSleepUsers("2019/06/22")
+    let result = sleepRepository.getTopSleepUsersByHoursSlept("2019/06/22")
     expect(result).to.deep.equal([sleepUser2.data[0]]);
   });
 
   it('should be able to return the user with the most sleep for a given day', () => { 
     let organizedData = sleepRepository.getDataOrganizedByUser()
     sleepRepository.generateSleepObjects(organizedData);
-    let result = sleepRepository.getMostSleepUsers("2019/06/18")
+    let result = sleepRepository.getTopSleepUsersByHoursSlept("2019/06/18")
     expect(result).to.deep.equal([sleepUser1.data[3], sleepUser2.data[4]]);
   });
 });
