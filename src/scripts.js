@@ -13,6 +13,8 @@ const hydrationDaily = document.querySelector('.hydration-daily-top');
 const sleepDaily = document.querySelector('.sleep-daily-top');
 const sleepWeeklyGraph = document.querySelector('.sleep-weekly-graph');
 const sleepAverage = document.querySelector('#sleep-average');
+const activityDaily = document.querySelector('#activity-daily-aux');
+const activityWeekly = document.querySelector('#weekly-activity-aux');
 
 window.addEventListener('load', function() {
   generateRepositoryData();
@@ -24,10 +26,12 @@ function generateRepositoryData() {
   generateFromRepository(sleepRepository, Sleep);
   getDataOrganizedByUser(activityRepository);
   generateFromRepository(activityRepository, Activity);
+  addStepGoalMet()
 }
 
 function updateHTML(date) {
   userInfoUpdateHTML();
+  updateActivityDayHTML(date)
   updateHydrationWeekHTML(date);
   updateHydrationDayHTML(date);
   updateSleepDayHTML(date);
@@ -56,6 +60,16 @@ function generateFromRepository(repository, classType) {
 function createCurrentUser(id, repository, classType) {
   let userData = repository.data.filter(instance => instance.userID === id)
   return new classType(id, userData);
+}
+
+function addStepGoalMet() {
+  currentActivityUser.data.forEach(day => {
+    if (day.numSteps >= user.dailyStepGoal) {
+      day.stepGoalMet = "Yes!";
+    } else {
+      day.stepGoalMet = "Not yet";
+    }
+  });
 }
 
 function userInfoUpdateHTML() {
@@ -97,5 +111,19 @@ function updateSleepAverageHTML() {
   sleepAverage.insertAdjacentHTML(
     'beforeend', `<p>sleep quality: ${currentSleepUser.getAveragePerDay("hoursSlept")}</p>
     <p>average hours: ${currentSleepUser.getAveragePerDay("sleepQuality")}</p>`
+  );
+}
+
+function updateActivityDayHTML(date) {
+  let activityToday = currentActivityUser.getCurrentDayActivityInfo(date);
+  let milesWalked = ((activityToday.numSteps * user.strideLength) / 5280).toFixed(1);
+  let glabalAverageNumSteps = activityRepository.getAverageActivity(date, "numSteps");
+  let glabalAverageMinutesActive = activityRepository.getAverageActivity(date, "minutesActive");
+  let glabalAverageFlightsOfStairs = activityRepository.getAverageActivity(date, "flightsOfStairs");
+  activityDaily.insertAdjacentHTML(
+    'beforeend', `<h2>Your Activity Today:</h2>
+    <p>Step Goal Met: ${activityToday.stepGoalMet}, Steps: ${activityToday.numSteps}, Minutes Active: ${activityToday.minutesActive}, Flights Of Stairs: ${activityToday.flightsOfStairs}, Miles Walked: ${milesWalked}</p>
+    <h2>Global Average Today:</h2>
+    <p>Steps: ${glabalAverageNumSteps}, Minutes Active: ${glabalAverageMinutesActive}, flights Of Stairs: ${glabalAverageFlightsOfStairs}</p>`
   );
 }

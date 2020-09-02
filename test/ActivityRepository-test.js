@@ -78,6 +78,13 @@ describe('ActivityRepository', () => {
         "numSteps": 8015,
         "minutesActive": 106,
         "flightsOfStairs": 37
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/22",
+        "numSteps": 8015,
+        "minutesActive": 106,
+        "flightsOfStairs": 37
       }
     ];
     activityRepository = new ActivityRepository(activityTestData);
@@ -96,9 +103,8 @@ describe('ActivityRepository', () => {
     expect(activityRepository.data).to.equal(activityTestData);
   });
 
-  it('should be able to get average all-time activity for all users based on an activity type', () => {
-    let result = activityRepository.getAverageActivity("minutesActive");
-    console.log(result)
-    expect(result).to.equal(137.6);
+  it('should be able to get average activity for all users for a given day based on an activity type', () => {
+    let result = activityRepository.getAverageActivity("2019/06/22", "minutesActive");
+    expect(result).to.equal(110);
   });
 });
