@@ -5,7 +5,7 @@ header, body, input, select, textarea {
   color: #ffffff;
   font-family: "Roboto", Helvetica, sans-serif;
   font-weight: 300;
-  font-size: 1em; 
+  font-size: 1em;
   line-height: 2;
 }
 
@@ -51,20 +51,26 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(#ffefbc, #ffd3a9, #fff2b7);
+  background-image: url(../img/luke-chesser.jpg);
+  background-position: cover;
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
   background-size: cover;
+  width: 50%;
 }
 
-.card-image h1 {
-  font-size: 4rem;
+.right {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-top-right-radius: 1rem !important;
+  border-bottom-right-radius: 1rem !important;
+
 }
 
 .card-text{
   grid-area: text;
   overflow: auto;
-  margin: 1.5rem;
+  width: 50%;
 }
 
 .card-container {
