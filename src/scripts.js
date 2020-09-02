@@ -26,6 +26,7 @@ function generateRepositoryData() {
   generateFromRepository(sleepRepository, Sleep);
   getDataOrganizedByUser(activityRepository);
   generateFromRepository(activityRepository, Activity);
+  addStepGoalMet()
 }
 
 function updateHTML(date) {
@@ -59,6 +60,16 @@ function generateFromRepository(repository, classType) {
 function createCurrentUser(id, repository, classType) {
   let userData = repository.data.filter(instance => instance.userID === id)
   return new classType(id, userData);
+}
+
+function addStepGoalMet() {
+  currentActivityUser.data.forEach(day => {
+    if (day.numSteps >= user.dailyStepGoal) {
+      day.stepGoalMet = "Yes!";
+    } else {
+      day.stepGoalMet = "Not yet";
+    }
+  });
 }
 
 function userInfoUpdateHTML() {
@@ -107,11 +118,11 @@ function updateActivityDayHTML(date) {
   let activityToday = currentActivityUser.getCurrentDayActivityInfo(date);
   let milesWalked = ((activityToday.numSteps * user.strideLength) / 5280).toFixed(1);
   let glabalAverageNumSteps = activityRepository.getAverageActivity(date, "numSteps");
-  let glabalAverageMinutesActive = activityRepository.getAverageActivity(date, "minutesActive")
+  let glabalAverageMinutesActive = activityRepository.getAverageActivity(date, "minutesActive");
   let glabalAverageFlightsOfStairs = activityRepository.getAverageActivity(date, "flightsOfStairs");
   activityDaily.insertAdjacentHTML(
     'beforeend', `<h2>Your Activity Today:</h2>
-    <p>Steps: ${activityToday.numSteps}, Minutes Active: ${activityToday.minutesActive}, Flights Of Stairs: ${activityToday.flightsOfStairs}, Miles Walked: ${milesWalked}</p>
+    <p>Step Goal Met: ${activityToday.stepGoalMet}, Steps: ${activityToday.numSteps}, Minutes Active: ${activityToday.minutesActive}, Flights Of Stairs: ${activityToday.flightsOfStairs}, Miles Walked: ${milesWalked}</p>
     <h2>Global Average Today:</h2>
     <p>Steps: ${glabalAverageNumSteps}, Minutes Active: ${glabalAverageMinutesActive}, flights Of Stairs: ${glabalAverageFlightsOfStairs}</p>`
   );
