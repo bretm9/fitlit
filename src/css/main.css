@@ -10,10 +10,12 @@ header, body, input, select, textarea {
 }
 
 header {
-  display: box;
+  display: flex;
   border-radius: 1rem;
   background-image: linear-gradient(to right, #F5E663, #D44D5C);
-  width: 100%;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
@@ -28,16 +30,20 @@ body {
 
 .card {
   color: #121118;
-  display: grid;
-  grid-template-columns: 20rem;
-  grid-template-rows: 13rem 13rem;
-  grid-template-areas: "image" "text" "stats";
+  display: flex;
+  margin: 1rem;
 
   font-family: inherit;
   border-radius: 1rem;
   background-color: #F7ECE1;
   box-shadow: 0.5rem 1rem 1rem #121118;
   text-align: center;
+}
+
+#user-info-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-image {
@@ -47,7 +53,7 @@ body {
   align-items: center;
   background-image: linear-gradient(#ffefbc, #ffd3a9, #fff2b7);
   border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
   background-size: cover;
 }
 
@@ -62,7 +68,12 @@ body {
 }
 
 .card-container {
-  display: grid;
-  grid-template-columns: 20rem 20rem;
-  grid-gap: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.category {
+  width: 90%
 }
