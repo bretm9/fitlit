@@ -1,18 +1,18 @@
-let userRepository = new UserRepository(userData);
-let user = new User(userRepository.getUserData(1));
-let hydration = new Hydration(1, hydrationData);
-let sleepRepository = new SleepRepository(sleepData);
-let activityRepository = new ActivityRepository(activityData);
-let currentSleepUser = createCurrentUser(1, sleepRepository, Sleep);
-let currentActivityUser = createCurrentUser(1, activityRepository, Activity);
+const userRepository = new UserRepository(userData);
+const user = new User(userRepository.getUserData(1));
+const hydration = new Hydration(1, hydrationData);
+const sleepRepository = new SleepRepository(sleepData);
+const activityRepository = new ActivityRepository(activityData);
+const currentSleepUser = createCurrentUser(1, sleepRepository, Sleep);
+const currentActivityUser = createCurrentUser(1, activityRepository, Activity);
 
-let userNameNav = document.querySelector('.user-name-nav');
-let userInfoCard = document.querySelector('#user-info-card');
-let HydrationWeeklyGraph = document.querySelector('#hydration-weekly-graph');
-let hydrationDaily = document.querySelector('.hydration-daily-top');
-let sleepDaily = document.querySelector('.sleep-daily-top');
-let sleepWeeklyGraph = document.querySelector('.sleep-weekly-graph');
-let sleepAverage = document.querySelector('#sleep-average');
+const userNameNav = document.querySelector('.user-name-nav');
+const userInfoCard = document.querySelector('#user-info-card');
+const HydrationWeeklyGraph = document.querySelector('#hydration-weekly-graph');
+const hydrationDaily = document.querySelector('.hydration-daily-top');
+const sleepDaily = document.querySelector('.sleep-daily-top');
+const sleepWeeklyGraph = document.querySelector('.sleep-weekly-graph');
+const sleepAverage = document.querySelector('#sleep-average');
 
 window.addEventListener('load', function() {
   generateRepositoryData();
