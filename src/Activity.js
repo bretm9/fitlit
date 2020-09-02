@@ -37,7 +37,6 @@ class Activity {
     let dataSortedByRecord = this.data.sort((dayA, dayB) => {
       return dayB[property] - dayA[property];
     });
-    console.log(dataSortedByRecord);
     return dataSortedByRecord[0][property];
   }
 }
