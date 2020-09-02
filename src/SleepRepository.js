@@ -10,17 +10,6 @@ class SleepRepository {
     return +(totalSleepQuality / this.data.length).toFixed(1);
   }
 
-  getDataOrganizedByUser() {
-    let organizedData = this.data.reduce((allUsers, instance) => {
-      if (!allUsers[`user${instance.userID}`]) {
-        allUsers[`user${instance.userID}`] = [];
-      }
-      allUsers[`user${instance.userID}`].push(instance);
-      return allUsers;
-    }, {});
-    this.organizedData = organizedData;
-  }
-
   getTopSleepUsersBySleepQuality(date) {
     let usersWithGoodSleep = this.users.filter(user => {
       let weekOfSleep = user.getSleepInfoForPreviousSevenDays(date)
@@ -42,11 +31,6 @@ class SleepRepository {
     });
     let userWithMostHoursSlept = sortedByHoursSlept[sortedByHoursSlept.length - 1]
     return sortedByHoursSlept.filter(instance => instance.hoursSlept === userWithMostHoursSlept.hoursSlept);
-  }
-
-  createCurrentUser(id) {
-    let userData = this.data.filter(instance => instance.userID === id)
-    return new Sleep(id, userData);
   }
 }
 
