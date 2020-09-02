@@ -5,13 +5,14 @@ header, body, input, select, textarea {
   color: #ffffff;
   font-family: "Roboto", Helvetica, sans-serif;
   font-weight: 300;
-  font-size: 1em;
+  font-size: 1em; 
   line-height: 2;
 }
 
 header {
   display: box;
-  background-color: #121118;
+  border-radius: 1rem;
+  background-image: linear-gradient(to right, #F5E663, #D44D5C);
   width: 100%;
   text-align: center;
 }
@@ -19,7 +20,7 @@ header {
 body {
   display: flex;
   flex-direction: column;
-  background-color: #272635;
+  background-image: linear-gradient(#23395B, #161925);
   color: #f1f7ff;
   align-items: center;
   justify-content: center;
@@ -44,7 +45,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(#F2E1CF, white);
+  background-image: linear-gradient(#ffefbc, #ffd3a9, #fff2b7);
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
   background-size: cover;
