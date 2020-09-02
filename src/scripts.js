@@ -15,17 +15,25 @@ let sleepWeeklyGraph = document.querySelector('.sleep-weekly-graph');
 let sleepAverage = document.querySelector('#sleep-average');
 
 window.addEventListener('load', function() {
+  generateRepositoryData();
+  updateHTML("2019/06/22");
+});
+
+function generateRepositoryData() {
   getDataOrganizedByUser(sleepRepository);
   generateFromRepository(sleepRepository, Sleep);
   getDataOrganizedByUser(activityRepository);
   generateFromRepository(activityRepository, Activity);
+}
+
+function updateHTML(date) {
   userInfoUpdateHTML();
-  updateHydrationWeekHTML("2019/06/22");
-  updateHydrationDayHTML("2019/06/22");
-  updateSleepDayHTML("2019/06/22");
-  updateSleepWeekHTML("2019/06/22");
+  updateHydrationWeekHTML(date);
+  updateHydrationDayHTML(date);
+  updateSleepDayHTML(date);
+  updateSleepWeekHTML(date);
   updateSleepAverageHTML();
-});
+}
 
 function getDataOrganizedByUser(repository) {
   let organizedData = repository.data.reduce((allUsers, instance) => {
@@ -36,6 +44,13 @@ function getDataOrganizedByUser(repository) {
     return allUsers;
   }, {});
   repository.organizedData = organizedData;
+}
+
+function generateFromRepository(repository, classType) {
+  let arrayOfUsers = Object.values(repository.organizedData)
+  repository.users = arrayOfUsers.map((user, index) => {
+    return new classType((index + 1), user);
+  }); 
 }
 
 function createCurrentUser(id, repository, classType) {
@@ -83,11 +98,4 @@ function updateSleepAverageHTML() {
     'beforeend', `<p>sleep quality: ${currentSleepUser.getAveragePerDay("hoursSlept")}</p>
     <p>average hours: ${currentSleepUser.getAveragePerDay("sleepQuality")}</p>`
   );
-}
-
-function generateFromRepository(repository, classType) {
-  let arrayOfUsers = Object.values(repository.organizedData)
-  repository.users = arrayOfUsers.map((user, index) => {
-    return new classType((index + 1), user);
-  }); 
 }
