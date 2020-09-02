@@ -3,11 +3,12 @@ class ActivityRepository {
     this.data = data;
   }
 
-  getAverageActivity(property) {
-    let totalActivity = this.data.reduce((activity, currentUser) => {
+  getAverageActivity(date, property) {
+    let activityToday = this.data.filter(day => day.date === date)
+    let totalActivity = activityToday.reduce((activity, currentUser) => {
       return activity + currentUser[property];
     }, 0);
-    return +(totalActivity / this.data.length).toFixed(1);
+    return +(totalActivity / activityToday.length).toFixed(1);
   }
 }
 
