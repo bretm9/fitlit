@@ -25,7 +25,7 @@ window.addEventListener('load', function() {
 
 function userInfoUpdateHTML() {
   userNameNav.innerHTML = `<p>Welcome ${user.getFirstName()}!</p>`
-  userInfoCard.innerHTML = `<div class="container">
+  userInfoCard.innerHTML = `<div class="card-image">
     <h4><b>${user.getFirstName()}'s info</b></h4>
     <p>${user.address}</p>
     <p>${user.email}</p>
