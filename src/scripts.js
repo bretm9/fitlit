@@ -1,27 +1,62 @@
-let userRepository = new UserRepository(userData);
-let user = new User(userRepository.getUserData(1));
-let hydration = new Hydration(1, hydrationData);
-let sleepRepository = new SleepRepository(sleepData);
-let currentSleepUser = sleepRepository.createCurrentUser(1);
+const userRepository = new UserRepository(userData);
+const user = new User(userRepository.getUserData(1));
+const hydration = new Hydration(1, hydrationData);
+const sleepRepository = new SleepRepository(sleepData);
+const activityRepository = new ActivityRepository(activityData);
+const currentSleepUser = createCurrentUser(1, sleepRepository, Sleep);
+const currentActivityUser = createCurrentUser(1, activityRepository, Activity);
 
-let userNameNav = document.querySelector('.user-name-nav');
-let userInfoCard = document.querySelector('#user-info-card');
-let HydrationWeeklyGraph = document.querySelector('#hydration-weekly-graph');
-let hydrationDaily = document.querySelector('.hydration-daily-top');
-let sleepDaily = document.querySelector('.sleep-daily-top');
-let sleepWeeklyGraph = document.querySelector('.sleep-weekly-graph');
-let sleepAverage = document.querySelector('#sleep-average');
+const userNameNav = document.querySelector('.user-name-nav');
+const userInfoCard = document.querySelector('#user-info-card');
+const HydrationWeeklyGraph = document.querySelector('#hydration-weekly-graph');
+const hydrationDaily = document.querySelector('.hydration-daily-top');
+const sleepDaily = document.querySelector('.sleep-daily-top');
+const sleepWeeklyGraph = document.querySelector('.sleep-weekly-graph');
+const sleepAverage = document.querySelector('#sleep-average');
 
 window.addEventListener('load', function() {
-  sleepRepository.getDataOrganizedByUser()
-  generateSleepObjects(sleepRepository);
-  userInfoUpdateHTML();
-  updateHydrationWeekHTML("2019/06/22");
-  updateHydrationDayHTML("2019/06/22");
-  updateSleepDayHTML("2019/06/22");
-  updateSleepWeekHTML("2019/06/22");
-  updateSleepAverageHTML();
+  generateRepositoryData();
+  updateHTML("2019/06/22");
 });
+
+function generateRepositoryData() {
+  getDataOrganizedByUser(sleepRepository);
+  generateFromRepository(sleepRepository, Sleep);
+  getDataOrganizedByUser(activityRepository);
+  generateFromRepository(activityRepository, Activity);
+}
+
+function updateHTML(date) {
+  userInfoUpdateHTML();
+  updateHydrationWeekHTML(date);
+  updateHydrationDayHTML(date);
+  updateSleepDayHTML(date);
+  updateSleepWeekHTML(date);
+  updateSleepAverageHTML();
+}
+
+function getDataOrganizedByUser(repository) {
+  let organizedData = repository.data.reduce((allUsers, instance) => {
+    if (!allUsers[`user${instance.userID}`]) {
+      allUsers[`user${instance.userID}`] = [];
+    }
+    allUsers[`user${instance.userID}`].push(instance);
+    return allUsers;
+  }, {});
+  repository.organizedData = organizedData;
+}
+
+function generateFromRepository(repository, classType) {
+  let arrayOfUsers = Object.values(repository.organizedData)
+  repository.users = arrayOfUsers.map((user, index) => {
+    return new classType((index + 1), user);
+  }); 
+}
+
+function createCurrentUser(id, repository, classType) {
+  let userData = repository.data.filter(instance => instance.userID === id)
+  return new classType(id, userData);
+}
 
 function userInfoUpdateHTML() {
   userNameNav.innerHTML = `<h1>Welcome ${user.getFirstName()}!</h1>`
@@ -44,7 +79,6 @@ function updateHydrationWeekHTML(day) {
 
 function updateHydrationDayHTML(day) {
   hydrationDaily.innerHTML = `<p>Today - ${hydration.getCurrentDayHydration(day).numOunces} oz</p>`
-  
 }
 
 function updateSleepDayHTML(date) {
@@ -59,17 +93,9 @@ function updateSleepWeekHTML(date) {
   });
 }
 
-  function updateSleepAverageHTML() {
-    sleepAverage.insertAdjacentHTML(
-      'beforeend', `<p>sleep quality: ${currentSleepUser.getAveragePerDay("hoursSlept")}</p>
-      <p>average hours: ${currentSleepUser.getAveragePerDay("sleepQuality")}</p>`
-    );
-  }
-
-  function generateSleepObjects(sleepRepository) {
-    let arrayOfUsers = Object.values(sleepRepository.organizedData)
-
-    sleepRepository.users = arrayOfUsers.map((user, index) => {
-      return new Sleep((index + 1), user);
-    });
-  }
+function updateSleepAverageHTML() {
+  sleepAverage.insertAdjacentHTML(
+    'beforeend', `<p>sleep quality: ${currentSleepUser.getAveragePerDay("hoursSlept")}</p>
+    <p>average hours: ${currentSleepUser.getAveragePerDay("sleepQuality")}</p>`
+  );
+}

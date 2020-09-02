@@ -329,11 +329,6 @@ describe('SleepRepository', () => {
     expect(averageSleepQuality).to.equal(3.2);
   });
 
-  it('should be able to organize data by user', () => { 
-    sleepRepository.getDataOrganizedByUser()
-    expect(sleepRepository.organizedData).to.deep.equal(organizedTestData);
-  });
-
   it('should be able to return users with sleep quality above 3 based on a week', () => { 
     let topThreeUsers = sleepRepository.getTopSleepUsersBySleepQuality("2019/06/22");
     expect(topThreeUsers).to.deep.equal([sleepUser1]);
