@@ -13,6 +13,8 @@ const hydrationDaily = document.querySelector('.hydration-daily-top');
 const sleepDaily = document.querySelector('.sleep-daily-top');
 const sleepWeeklyGraph = document.querySelector('.sleep-weekly-graph');
 const sleepAverage = document.querySelector('#sleep-average');
+const activityDaily = document.querySelector('#activity-daily-aux');
+// activityWeekly('#')
 
 window.addEventListener('load', function() {
   generateRepositoryData();
@@ -28,6 +30,7 @@ function generateRepositoryData() {
 
 function updateHTML(date) {
   userInfoUpdateHTML();
+  updateActivityDayHTML(date)
   updateHydrationWeekHTML(date);
   updateHydrationDayHTML(date);
   updateSleepDayHTML(date);
@@ -98,4 +101,9 @@ function updateSleepAverageHTML() {
     'beforeend', `<p>sleep quality: ${currentSleepUser.getAveragePerDay("hoursSlept")}</p>
     <p>average hours: ${currentSleepUser.getAveragePerDay("sleepQuality")}</p>`
   );
+}
+
+function updateActivityDayHTML(date) {
+  let activityToday = currentActivityUser.getCurrentDayActivityInfo(date);
+  activityDaily.innerHTML = `Today - Steps: ${activityToday.numSteps}, Minutes Active: ${activityToday.minutesActive}, flights Of Stairs: ${activityToday.flightsOfStairs}`;
 }
