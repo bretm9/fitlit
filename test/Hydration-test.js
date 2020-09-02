@@ -39,7 +39,8 @@ describe('Hydration', () => {
         "userID": 2,
         "date": "2019/06/14",
         "numOunces": 214
-      },{
+      },
+      {
         "userID": 1,
         "date": "2019/06/15",
         "numOunces": 115
