@@ -14,7 +14,7 @@ const sleepDaily = document.querySelector('.sleep-daily-top');
 const sleepWeeklyGraph = document.querySelector('.sleep-weekly-graph');
 const sleepAverage = document.querySelector('#sleep-average');
 const activityDaily = document.querySelector('#activity-daily-aux');
-// activityWeekly('#')
+const activityWeekly = document.querySelector('#weekly-activity-aux');
 
 window.addEventListener('load', function() {
   generateRepositoryData();
@@ -105,5 +105,14 @@ function updateSleepAverageHTML() {
 
 function updateActivityDayHTML(date) {
   let activityToday = currentActivityUser.getCurrentDayActivityInfo(date);
-  activityDaily.innerHTML = `Today - Steps: ${activityToday.numSteps}, Minutes Active: ${activityToday.minutesActive}, flights Of Stairs: ${activityToday.flightsOfStairs}`;
+  let milesWalked = ((activityToday.numSteps * user.strideLength) / 5280).toFixed(1);
+  let glabalAverageNumSteps = activityRepository.getAverageActivity(date, "numSteps");
+  let glabalAverageMinutesActive = activityRepository.getAverageActivity(date, "minutesActive")
+  let glabalAverageFlightsOfStairs = activityRepository.getAverageActivity(date, "flightsOfStairs");
+  activityDaily.insertAdjacentHTML(
+    'beforeend', `<h2>Your Activity Today:</h2>
+    <p>Steps: ${activityToday.numSteps}, Minutes Active: ${activityToday.minutesActive}, Flights Of Stairs: ${activityToday.flightsOfStairs}, Miles Walked: ${milesWalked}</p>
+    <h2>Global Average Today:</h2>
+    <p>Steps: ${glabalAverageNumSteps}, Minutes Active: ${glabalAverageMinutesActive}, flights Of Stairs: ${glabalAverageFlightsOfStairs}</p>`
+  );
 }
