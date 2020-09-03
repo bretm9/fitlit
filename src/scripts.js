@@ -5,6 +5,7 @@ const sleepRepository = new SleepRepository(sleepData);
 const activityRepository = new ActivityRepository(activityData);
 const currentSleepUser = createCurrentUser(1, sleepRepository, Sleep);
 const currentActivityUser = createCurrentUser(1, activityRepository, Activity);
+let weeklyActivityGraphStorage = {}
 
 const userNameNav = document.querySelector('.user-name-nav');
 const userInfoCard = document.querySelector('#user-info-card');
@@ -15,6 +16,8 @@ const sleepWeeklyGraph = document.querySelector('.sleep-weekly-graph');
 const sleepAverage = document.querySelector('#sleep-average');
 const activityDaily = document.querySelector('#activity-daily-aux');
 const activityWeekly = document.querySelector('#weekly-activity-aux');
+const activityWeeklyGraphContainer = document.querySelector('.activity-weekly-graph-container');
+const weeklyActivityGraph = document.getElementById('weekly-activity-graph').getContext('2d');
 
 window.addEventListener('load', function() {
   generateRepositoryData();
@@ -31,7 +34,8 @@ function generateRepositoryData() {
 
 function updateHTML(date) {
   userInfoUpdateHTML();
-  updateActivityDayHTML(date)
+  updateActivityDayHTML(date);
+  updateActivityWeekHTML(date);
   updateHydrationWeekHTML(date);
   updateHydrationDayHTML(date);
   updateSleepDayHTML(date);
@@ -54,7 +58,7 @@ function generateFromRepository(repository, classType) {
   let arrayOfUsers = Object.values(repository.organizedData)
   repository.users = arrayOfUsers.map((user, index) => {
     return new classType((index + 1), user);
-  }); 
+  });
 }
 
 function createCurrentUser(id, repository, classType) {
@@ -126,4 +130,49 @@ function updateActivityDayHTML(date) {
     <h2>Global Average Today:</h2>
     <p>Steps: ${glabalAverageNumSteps}, Minutes Active: ${glabalAverageMinutesActive}, flights Of Stairs: ${glabalAverageFlightsOfStairs}</p>`
   );
+}
+
+function updateActivityWeekHTML(date) {
+  let activityForWeek = currentActivityUser.getActivityInfoForPreviousSevenDays(date);
+  activityForWeek.map(day => {
+    activityWeekly.insertAdjacentHTML('beforeend', `<p>${day.date}: - minutesActive: ${day.minutesActive}, flights of stairs: ${day.flightsOfStairs}</p>`)
+  });
+  weeklyActivityGraphStorage = new Chart(weeklyActivityGraph, {
+     type: 'line',
+     data: {
+         labels: [activityForWeek[0].date, activityForWeek[1].date, activityForWeek[2].date, activityForWeek[3].date, activityForWeek[4].date, activityForWeek[5].date, activityForWeek[6].date],
+         datasets: [{
+             label: 'My Steps',
+             data: [activityForWeek[0].numSteps, activityForWeek[1].numSteps, activityForWeek[2].numSteps, activityForWeek[3].numSteps, activityForWeek[4].numSteps, activityForWeek[5].numSteps, activityForWeek[6].numSteps],
+             backgroundColor: [
+                 'rgba(255, 159, 64, 0.2)',
+                 'rgba(255, 159, 64, 0.2)',
+                 'rgba(255, 159, 64, 0.2)',
+                 'rgba(255, 159, 64, 0.2)',
+                 'rgba(255, 159, 64, 0.2)',
+                 'rgba(255, 159, 64, 0.2)',
+                 'rgba(255, 159, 64, 0.2)'
+             ],
+             borderColor: [
+                 'rgba(255, 159, 64, 1)',
+                 'rgba(255, 159, 64, 1)',
+                 'rgba(255, 159, 64, 1)',
+                 'rgba(255, 159, 64, 1)',
+                 'rgba(255, 159, 64, 1)',
+                 'rgba(255, 159, 64, 1)',
+                 'rgba(255, 159, 64, 1)'
+             ],
+             borderWidth: 1
+         }]
+     },
+     options: {
+         scales: {
+             yAxes: [{
+                 ticks: {
+                     beginAtZero: true
+                 }
+             }]
+         }
+     }
+  });
 }
