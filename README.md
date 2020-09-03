@@ -1,82 +1,91 @@
-# FitLit Starter Kit
+# Fitlit
 
-The details of this project are outline in [this project spec](http://frontend.turing.io/projects/fitlit.html).
+> A Front-End Project by [Bret Merritt](https://github.com/bretm9) & Caleb Cyphers(https://github.com/CalebCyphers)
+---
+## Contents
+1. [Overview and Goals](#overview)
+1. [Technologies](#technologies)
+1. [Design](#design)
+1. [Widgets](#widgets)
+1. [Challenges](#challenges)
+1. [Successes](#successes)
+---
 
-## Setup
+## Overview
+We are Front-End students at the Turing School of Software and Design. This project was our paired project for Module 2, and was built with a focus on learning how to use object and array prototype methods to perform data manipulation on large datasets.
 
-1. Within your group, decide on one person to have the project repository (repo) on their GitHub account. Then, that person should fork this repo - on the top right corner of this page, click the **Fork** button.
-1. Both memebers of the group should clone down the _forked_ repo. Since you don't want to name your project "activity-tracker-starter", you can use an optional argument when you run git clone (you replace the [...] with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` to install project dependencies.
-1. Run `open src/index.html` in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page)
-1. Make sure both members of your team are collaborators on the forked repo.
+### Abstract
+This app is an activity tracker that offers a look into the user's health data for a given week. It displays activity, hydration, and sleep data. There are in depth insights for the current day, as well as several graphs visualizing weekly data. There is also a section to vew the global average activity of all users for the current day. 
 
-## Testing
+### Goals
 
-There is no boilerplate for testing in this starter-kit repo. You will need to set this up yourself. However, if you ran `npm install`, then the tooling you need to start testing is already installed (`mocha` and `chai`).
+* Gaining a better understanding of ES6 and test-driven-design. 
+* Learning to translate original composition into a website
+* Getting comfortable with array prototype methods
+* Working with large datasets
 
-## Linting Your Code
+---
 
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit, but that's ok - the linter is still running successfully.
+ ## Technologies
 
-Your linter will look only at the JavaScript files you have within the `src` and the `test` directories.
+  - HTML
+  - CSS
+  - JavaScript
+  - Mocha & Chai
+  - MomentJS
+  - ChartJS
+  - Git
+  - Lint
 
-## Data Model
+> [Back to the top](#fitlit)
+---
 
-**Users**
+## Design
 
-```
-[
-  {
-    "id": [number],
-    "name": [string],
-    "address": [string],
-    "email": [string],
-    "strideLength": [number - feet],
-    "dailyStepGoal": [number - steps],
-    "friends": [array - one-way connection to other user(s)]
-  },
-  ...more user data
-]
-```
+  Our layout Is based on common activity tracking apps. We organized categories by what we thought the most useful data was, keeping the high priority data at the top.
+  We specifically took inspiration from popular sleep apps to create a calm design, while using pops of color to keep the app lively. 
 
-**Activity**
+> [Back to Features](#features)
 
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numSteps": [number - steps],
-    "minutesActive": [number - minutes],
-    "flightsOfStairs": [number - flights]
-  },
-  ...more activity data
-]
-```
+## Widgets
 
-**Hydration**
+### Activity
+  The Activity section contains a card for today's activity which includes:
+    * Whether step goal has been met
+    * Total steps today
+    * Total minutes active today
+    * Flights of Stairs climbed today
+    * Miles Walked today.
 
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numOunces": [number - ounces]
-  },
-  ...more hydration data
-]
-```
+  It also shows the global averages for common activities to crosscheck your progress!
 
-**Sleep**
+  Also included in the Activity section is a weekly view of the user's steps. This line graph illustrates how user's steps fluxuate throughout the week.
+  Next to the weekly graph is the minutes active and flights of stairs climbed each day in the week.
 
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "hoursSlept": [number - hours],
-    "sleepQuality": [number - unitless]
-  },
-  ...more sleep data
-]
-```
+### Hydration
+  The Hydration section contains two cards:
+    * A card for the current day, which indicates the number of ounces drank today.
+    * A card for the week, which holds a weekly line graph that visualized all the ounces drank throughout the week.
+
+### Sleep
+  The Sleep section contains three cards:
+    * A card for the current day, displaying the hours slept that day and the sleep quality
+    * A card for the week, displaying a line graph to illustrate the change in hours slept per day throughout the week.
+    * A card for the user's average hours slept and average sleep quality for all time.
+
+> [Back to Features](#features)
+
+---
+ ## Challenges  
+ 
+ We faced some difficulties in importing npm packages into our project while keeping browser compatibility. Along the same lines, ran into some errors while attempting to instatiate data objects within data repository classes due to the way the browser compiles all the files into one global scope.
+ 
+> [Back to the top](#fitlit)
+
+---
+ ## Successes
+ 
+We managed to overcome the browser issues we faced and successfully import npm packages to properly manipulate our data and display nicely on the page. A big win for us was when we finally were displaying weekly data for a user's sleep data existing in a repository. This project really managed to make us to wrap our heads around how iterator methods can efficiently manipulate data.
+  
+> [Back to the top](#fitlit)
+ ---
