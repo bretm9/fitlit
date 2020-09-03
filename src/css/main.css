@@ -47,7 +47,7 @@ body {
   align-items: center;
 }
 
-.hyrdration-weekly-graph-container {
+.graph-container {
   border-top-right-radius: 1rem !important;
   border-bottom-right-radius: 1rem !important;
   width: 100% !important;
