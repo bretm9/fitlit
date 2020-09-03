@@ -32,6 +32,7 @@ body {
   color: #121118;
   display: flex;
   margin: 1rem;
+  justify-content: center;
 
   font-family: inherit;
   border-radius: 1rem;
@@ -44,6 +45,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.graph-container {
+  border-top-right-radius: 1rem !important;
+  border-bottom-right-radius: 1rem !important;
+  width: 100% !important;
 }
 
 .card-image {
@@ -64,7 +71,6 @@ body {
   border-bottom-left-radius: 0 !important;
   border-top-right-radius: 1rem !important;
   border-bottom-right-radius: 1rem !important;
-
 }
 
 .card-text{

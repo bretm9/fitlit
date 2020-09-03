@@ -22,11 +22,12 @@
     <h2>Activity</h2>
     <section class="card-container" id="steps-section">
       <section class="card" id="activity-daily">
-        <div class="card-image"></div>
         <div class="card-text" id="activity-daily-aux"></div>
       </section>
       <section class="card" id="activity-weekly">
-        <div class="weekly-graph card-image"></div>
+        <div class="activity-weekly-graph-container card-image">
+          <canvas class="graph" id="weekly-activity-graph"></canvas>
+        </div>
         <div class="card-text" id="weekly-activity-aux"></div>
       </section>
       <section class="card" id="steps-average">
@@ -40,12 +41,12 @@
     <h2>Hydration</h2>
     <section class="card-container" id="hydration-section">
       <section class="card" id="hydration-daily">
-        <div class="hydration-daily-top card-image"></div>
-        <div class="card-text"></div>
+        <div class="hydration-daily-top card-text"></div>
       </section>
       <section class="card" id="hydration-weekly">
-        <div class="weekly-graph card-image" id="hydration-weekly-graph"></div>
-        <div class="card-text"></div>
+        <div class="hyrdration-weekly-graph-container graph-container card-image">
+          <canvas class="graph" id="weekly-hydration-graph"></canvas>
+        </div>
       </section>
     </section>
   </article>
@@ -54,21 +55,21 @@
     <h2>Sleep</h2>
     <section class="card-container" id="sleep-section">
       <section class="card" id="sleep-daily">
-        <div class="sleep-daily-top card-image"></div>
-        <div class="card-text"></div>
+        <div class="sleep-daily-top card-text"></div>
       </section>
       <section class="card" id="sleep-weekly">
-        <div class="sleep-weekly-graph card-image"></div>
-        <div class="card-text"></div>
+        <div class="sleep-weekly-graph-container graph-container card-image">
+          <canvas class="graph" id="weekly-sleep-graph"></canvas>
+        </div>
       </section>
-      <section class="card" id="sleep-average">
-        <div class="sleep-average-graph card-image"></div>
-        <div class="card-text"></div>
+      <section class="card">
+        <div class="card-text" id="sleep-average"></div>
       </section>
     </section>
   </article>
 
-  <script src="./moment.js"></script>
+  <script type="text/javascript" src="./moment.js"></script>
+  <script type="text/javascript" src="./Chart.js"></script>
   <script type="text/javascript" src="../data/users.js"></script>
   <script type="text/javascript" src="../data/hydration.js"></script>
   <script type="text/javascript" src="../data/sleep.js"></script>
@@ -81,7 +82,7 @@
   <script type="text/javascript" src="./UserRepository.js"></script>
   <script type="text/javascript" src="./Hydration.js"></script>
   <script type="text/javascript" src="./scripts.js"></script>
-  
+
 </body>
 
 </html>
