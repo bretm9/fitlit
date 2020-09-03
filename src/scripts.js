@@ -5,23 +5,24 @@ const sleepRepository = new SleepRepository(sleepData);
 const activityRepository = new ActivityRepository(activityData);
 const currentSleepUser = createCurrentUser(1, sleepRepository, Sleep);
 const currentActivityUser = createCurrentUser(1, activityRepository, Activity);
-let weeklyActivityGraphStorage = {}
+let weeklyGraphStorage = {};
+let today = "2019/06/22";
 
 const userNameNav = document.querySelector('.user-name-nav');
 const userInfoCard = document.querySelector('#user-info-card');
-const HydrationWeeklyGraph = document.querySelector('#hydration-weekly-graph');
 const hydrationDaily = document.querySelector('.hydration-daily-top');
 const sleepDaily = document.querySelector('.sleep-daily-top');
-const sleepWeeklyGraph = document.querySelector('.sleep-weekly-graph');
 const sleepAverage = document.querySelector('#sleep-average');
 const activityDaily = document.querySelector('#activity-daily-aux');
 const activityWeekly = document.querySelector('#weekly-activity-aux');
-const activityWeeklyGraphContainer = document.querySelector('.activity-weekly-graph-container');
+
 const weeklyActivityGraph = document.getElementById('weekly-activity-graph').getContext('2d');
+const weeklyHydrationGraph = document.getElementById('weekly-hydration-graph').getContext('2d');
+const weeklySleepGraph = document.getElementById('weekly-sleep-graph').getContext('2d');
 
 window.addEventListener('load', function() {
   generateRepositoryData();
-  updateHTML("2019/06/22");
+  updateHTML(today);
 });
 
 function generateRepositoryData() {
@@ -90,9 +91,7 @@ function userInfoUpdateHTML() {
 
 function updateHydrationWeekHTML(day) {
   let hydrationWeek = hydration.getOzForPreviousSevenDays(day);
-  hydrationWeek.map((day, i) => {
-    HydrationWeeklyGraph.insertAdjacentHTML('beforeend', `<p>Date: ${day.date}, Oz Drank: ${hydrationWeek[i].numOunces} oz</p>`)
-  });
+  generateChart(weeklyHydrationGraph, hydrationWeek, "numOunces");
 }
 
 function updateHydrationDayHTML(day) {
@@ -106,10 +105,9 @@ function updateSleepDayHTML(date) {
 
 function updateSleepWeekHTML(date) {
   let sleepThisWeek = currentSleepUser.getSleepInfoForPreviousSevenDays(date);
-  sleepThisWeek.map(sleepDay => {
-    sleepWeeklyGraph.insertAdjacentHTML('beforeend', `<p>${sleepDay.date}: - Hours slept: ${sleepDay.hoursSlept}, Sleep Quality: ${sleepDay.sleepQuality}</p>`)
-  });
+  generateChart(weeklySleepGraph, sleepThisWeek, "hoursSlept")
 }
+
 
 function updateSleepAverageHTML() {
   sleepAverage.insertAdjacentHTML(
@@ -137,42 +135,47 @@ function updateActivityWeekHTML(date) {
   activityForWeek.map(day => {
     activityWeekly.insertAdjacentHTML('beforeend', `<p>${day.date}: - minutesActive: ${day.minutesActive}, flights of stairs: ${day.flightsOfStairs}</p>`)
   });
-  weeklyActivityGraphStorage = new Chart(weeklyActivityGraph, {
-     type: 'line',
-     data: {
-         labels: [activityForWeek[0].date, activityForWeek[1].date, activityForWeek[2].date, activityForWeek[3].date, activityForWeek[4].date, activityForWeek[5].date, activityForWeek[6].date],
-         datasets: [{
-             label: 'My Steps',
-             data: [activityForWeek[0].numSteps, activityForWeek[1].numSteps, activityForWeek[2].numSteps, activityForWeek[3].numSteps, activityForWeek[4].numSteps, activityForWeek[5].numSteps, activityForWeek[6].numSteps],
-             backgroundColor: [
-                 'rgba(255, 159, 64, 0.2)',
-                 'rgba(255, 159, 64, 0.2)',
-                 'rgba(255, 159, 64, 0.2)',
-                 'rgba(255, 159, 64, 0.2)',
-                 'rgba(255, 159, 64, 0.2)',
-                 'rgba(255, 159, 64, 0.2)',
-                 'rgba(255, 159, 64, 0.2)'
-             ],
-             borderColor: [
-                 'rgba(255, 159, 64, 1)',
-                 'rgba(255, 159, 64, 1)',
-                 'rgba(255, 159, 64, 1)',
-                 'rgba(255, 159, 64, 1)',
-                 'rgba(255, 159, 64, 1)',
-                 'rgba(255, 159, 64, 1)',
-                 'rgba(255, 159, 64, 1)'
-             ],
-             borderWidth: 1
-         }]
-     },
-     options: {
-         scales: {
-             yAxes: [{
-                 ticks: {
-                     beginAtZero: true
-                 }
-             }]
-         }
-     }
-  });
+  generateChart(weeklyActivityGraph, activityForWeek, "numSteps");
+}
+
+function generateChart(node, weekOfData, property) {
+  Chart.defaults.global.defaultFontColor = 'rgba(221, 247, 233, 1)';
+  weeklyGraphStorage = new Chart(node, {
+    type: 'line',
+    data: {
+        labels: [weekOfData[0].date, weekOfData[1].date, weekOfData[2].date, weekOfData[3].date, weekOfData[4].date, weekOfData[5].date, weekOfData[6].date],
+        datasets: [{
+            label: [property],
+            data: [weekOfData[0][property], weekOfData[1][property], weekOfData[2][property], weekOfData[3][property], weekOfData[4][property], weekOfData[5][property], weekOfData[6][property]],
+            backgroundColor: [
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1,
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+ });
 }
