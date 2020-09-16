@@ -1,6 +1,6 @@
 # Fitlit
 
-> A Front-End Project by [Bret Merritt](https://github.com/bretm9) & Caleb Cyphers(https://github.com/CalebCyphers)
+> A Front-End Project by [Bret Merritt](https://github.com/bretm9) & [Caleb Cyphers](https://github.com/CalebCyphers)
 ---
 ## Contents
 1. [Overview and Goals](#overview)
